@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable } from 'rxjs';
 import { Http } from '@angular/http';
 import {BehaviorSubject, Subject} from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class BeerService {
     // get beers
     getBeers(): Observable<any> {
       const beerUrl = 'https://proxybeer.herokuapp.com/api/beerList';
-      return this.http.get(beerUrl);
+      return this.http.get(beerUrl).pipe(catchError(this.handleError));
     }
 
     // handling errors

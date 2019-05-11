@@ -1,21 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BeerService } from '../beer.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-beer-details',
   templateUrl: './beer-details.component.html',
   styleUrls: ['./beer-details.component.scss']
 })
-export class BeerDetailsComponent {
+export class BeerDetailsComponent implements OnInit, OnDestroy {
 
   details: any;
+  private destroy$ = new Subject();
 
   constructor(public router: ActivatedRoute, public service: BeerService) {
-    this.service.detailsOfBeer.subscribe(data => {
+  }
+
+  ngOnInit() {
+    this.service.detailsOfBeer.pipe( takeUntil(this.destroy$)).subscribe(data => {
       this.details = data;
-      console.log(this.details);
     });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

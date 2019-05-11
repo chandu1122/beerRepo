@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BeerService } from '../beer.service';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
 @Component({
   selector: 'app-beer-list',
   templateUrl: './beer-list.component.html',
   styleUrls: ['./beer-list.component.scss']
 })
-export class BeerListComponent implements OnInit {
+export class BeerListComponent implements OnInit, OnDestroy {
 
   beerList: any;
   private unsubscribe$: Subject<void> = new Subject();
@@ -20,13 +21,18 @@ export class BeerListComponent implements OnInit {
       const list =  response.json();
       this.beerList = JSON.parse(list.data).data;
     }, (error) => {
-      this.service.handleError(error);
+      alert(error);
     });
   }
 
   details(beer: any) {
     this.service.getDetails(beer);
     this.router.navigate(['/details'], {queryParams: {id: beer}});
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 }
