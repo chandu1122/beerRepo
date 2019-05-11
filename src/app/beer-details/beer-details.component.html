@@ -1,0 +1,17 @@
+<div class="carddetails" *ngIf="details">
+  <div>
+    <img [src]="details.labels? details.labels.large : 'https://brewerydb-images.s3.amazonaws.com/beer/c4f2KE/upload_jjKJ7g-medium.png'" />
+    <h2>{{details.name}}</h2>
+    <p *ngIf="details.abv">abv: {{details.abv}}</p>
+    <p *ngIf="details.ibu">ibu: {{details.ibu}}</p>
+    <p *ngIf="details.isOrganic">isOrganic: {{details.isOrganic}}</p>
+    <p *ngIf="details.year">year: {{details.year}}</p>
+    <p *ngIf="details.status">status: {{details.status}}</p>
+  </div>
+  <div *ngIf="details.glass">
+    <h3>Glass Deatils</h3>
+    <p> Name: {{details.glass.name}} </p>
+    <p> Id: {{details.glass.id}} </p>
+    <p> Date: {{details.glass.createDate}} </p>
+  </div>
+</div>
