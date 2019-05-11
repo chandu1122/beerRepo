@@ -6,7 +6,7 @@ const app = express();
 var port = process.env.PORT || 8090;
 
 // Serve only the static files form the dist directory
-app.use(express.static('./dist/angularTask'));
+app.use(express.static('./dist/beerList'));
 
 app.get('/*', function(req,res) {
 
