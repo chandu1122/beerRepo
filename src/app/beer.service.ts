@@ -13,10 +13,10 @@ export class BeerService {
 
   constructor(public http: Http) { }
 
-    // get beers
+    // get beers using proxy to BrewerryDb
     getBeers(): Observable<any> {
-      const beerUrl = 'https://proxybeer.herokuapp.com/api/beerList';
-      return this.http.get(beerUrl).pipe(catchError(this.handleError));
+      const proxyUrl = 'https://proxybeer.herokuapp.com/api/beerList';
+      return this.http.get(proxyUrl).pipe(catchError(this.handleError));
     }
 
     // handling errors

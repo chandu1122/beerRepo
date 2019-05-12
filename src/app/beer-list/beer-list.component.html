@@ -5,11 +5,11 @@
     <div *ngFor="let beer of beerList" class="[ col-xs-12 col-sm-offset-2 col-sm-8 col-md-12 ]">
       <ul class="event-list" (click)="details(beer)">
         <li>
-          <img [attr.src]="beer.labels? beer.labels.large : 'https://brewerydb-images.s3.amazonaws.com/beer/c4f2KE/upload_jjKJ7g-medium.png'" />
+          <img src="{{beer.icon}}" />
           <div class="info">
             <h2 class="title">{{beer.name}}</h2>
             <p class="desc">abv: {{beer.abv}}</p>
-            <p *ngIf="beer.ibu" class="desc">ibu: {{beer.ibu}}</p>
+            <p class="desc">ibu: {{beer.ibu}}</p>
           </div>
         </li>
       </ul>
@@ -18,5 +18,5 @@
 </div>
 
 <div *ngIf="!beerList">
-  <h1>Please wait.......!</h1>>
+  <h1>Please wait.......!</h1>
 </div>
